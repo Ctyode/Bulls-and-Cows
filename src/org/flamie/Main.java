@@ -11,6 +11,8 @@ public class Main {
 
     private static int bullCounter;
     private static int cowCounter;
+    private static int attemptCounter;
+    private static ArrayList<Integer> uniqueCows;
     private static ArrayList<Integer> randomArray;
     private static ArrayList<Integer> userArray;
     private static Scanner in;
@@ -20,6 +22,7 @@ public class Main {
         in = new Scanner(System.in);
         randomArray = new ArrayList<>(3);
         userArray = new ArrayList<>(3);
+        uniqueCows = new ArrayList<>();
 
         for(int i = 0; i <= 3; i++) {
             randomArray.add(i, random.nextInt(9));
@@ -34,6 +37,7 @@ public class Main {
             count();
             result();
         }
+        System.out.println("Игра пройдена за " + attemptCounter + attemptFormat(attemptCounter));
     }
 
     private static void input() {
@@ -53,19 +57,32 @@ public class Main {
     }
 
     private static void count() {
+        uniqueCows.clear();
         for(int i = 0; i <= 3; i++) {
             if(Objects.equals(userArray.get(i), randomArray.get(i))) {
                 bullCounter += 1;
-            }
-            if(userArray.contains(randomArray.get(i)) && !Objects.equals(userArray.get(i), randomArray.get(i))) {
+            } else if(userArray.contains(randomArray.get(i)) && !uniqueCows.contains(randomArray.get(i))) {
                 cowCounter += 1;
+                uniqueCows.add(randomArray.get(i)); // <3
             }
         }
     }
 
     private static void result() {
+        System.out.println("Рандом: " +  randomArray);
         System.out.println("Пользователь: " + userArray);
         System.out.println("Быки: " + bullCounter);
         System.out.println("Коровы: " + cowCounter);
+        attemptCounter += 1;
+    }
+
+    private static String attemptFormat(int attemptCounter) {
+        if(attemptCounter == 1) {
+            return " попытку";
+        } else if(attemptCounter >= 2 && attemptCounter <= 4) {
+            return " попытки";
+        } else {
+            return " попыток";
+        }
     }
 }
