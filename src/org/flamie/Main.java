@@ -69,7 +69,7 @@ public class Main {
     }
 
     private static void result() {
-        System.out.println("Рандом: " +  randomArray);
+        //System.out.println("Рандом: " +  randomArray);
         System.out.println("Пользователь: " + userArray);
         System.out.println("Быки: " + bullCounter);
         System.out.println("Коровы: " + cowCounter);
