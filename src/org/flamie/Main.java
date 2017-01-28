@@ -46,12 +46,17 @@ public class Main {
         int elementsCounter = 0;
         while(elementsCounter != 4) {
             System.out.print("Введите " + (elementsCounter + 1) + " число: ");
-            int num = in.nextInt();
-            if(num <= 9 && num >= 0) {
-                userArray.set(elementsCounter, num);
-                elementsCounter += 1;
+            if(in.hasNextInt()) {
+                int num = in.nextInt();
+                if (num <= 9 && num >= 0) {
+                    userArray.set(elementsCounter, num);
+                    elementsCounter += 1;
+                } else {
+                    System.out.println("Число должно быть от нуля до девяти");
+                }
             } else {
-                System.out.println("Число должно быть от нуля до девяти");
+                in.next();
+                System.out.println("Неверный ввод!");
             }
         }
     }
